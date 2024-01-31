@@ -31,9 +31,12 @@ function App() {
   function handleClickOperator(newOperator) {
     if (newOperator !== "-" && formula === "") {
       return;
-    } else if (newOperator === "-" && formula === "") {
+    } 
+    
+    if (newOperator === "-" && formula === "") {
       setFirstNumber(newOperator);
-    } else if (secondNumber === "" && firstNumber !== "" && operator === "") {
+      setCurrentNumber(newOperator);
+    } else if (secondNumber === "" && firstNumber !== "" && firstNumber !== "-" && operator === "") {
       setOperator(newOperator);
       setIsSecondNumber(true);
     } else if (operator !== "" && secondNumber !== "" && secondNumber !== "-") {
@@ -41,9 +44,10 @@ function App() {
       setOperator(newOperator);
       setSecondNumber("");
       setIsSecondNumber(true);
-    } else if (newOperator === "-" && operator !== "-" && isSecondNumber) {
-        setSecondNumber(newOperator)
-    } else { 
+    } else if (newOperator === "-" && operator !== "-" && firstNumber && isSecondNumber) {
+        setSecondNumber(newOperator);
+        setCurrentNumber(newOperator);
+    } else if (firstNumber !== "-"){ 
       setOperator(newOperator);
       setSecondNumber("");
       setIsSecondNumber(true);
@@ -199,7 +203,7 @@ function App() {
             .
           </button>
           <button id="equals" onClick={calculateResult}>
-            =
+          <i class="fa-solid fa-equals"></i>
           </button>
         </div>
       </div>
